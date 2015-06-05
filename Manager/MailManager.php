@@ -84,10 +84,6 @@ class MailManager
         $mail = new Mail();
         $mail->setType($type);
 
-        // evaluate user_type and to address
-        $user = null;
-
-//        $mail->setUserType($userType);
         $mail->setToEmail($to);
 
         if (!$from) {

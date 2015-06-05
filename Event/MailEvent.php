@@ -3,7 +3,7 @@
 namespace ITE\MailBundle\Data;
 
 
-use Jroc\CoreBundle\Entity\Mail;
+use ITE\MailBundle\Entity\Mail;
 use Symfony\Component\EventDispatcher\Event;
 
 /**
