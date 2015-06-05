@@ -1,16 +1,17 @@
-<?xml version="1.0" ?>
+services:
+    ite.mail.manager:
+        class: ITE\MailBundle\Manager\MailManager
+        arguments: [ @service_container ]
 
-<container xmlns="http://symfony.com/schema/dic/services"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    ite.mail.token_manager:
+        class: ITE\MailBundle\Manager\TokenManager
+        arguments: [@assetic.asset_factory]
+        tags:
+            - {name: kernel.event_listener, event: ite.mail, method: onMail}
 
-    <!--
-    <services>
-        <service id="mail.example" class="ITE\MailBundle\Example">
-            <argument type="service" id="service_id" />
-            <argument>plain_value</argument>
-            <argument>%parameter_name%</argument>
-        </service>
-    </services>
-    -->
-</container>
+#Example add extension
+#    jroc.mail.token.main_extension:
+#        class: Jroc\CoreBundle\Manager\Mail\MainExtension
+#        arguments: [@service_container]
+#        tags:
+#            - {name: jroc.mail.token_extension}

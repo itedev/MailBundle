@@ -8,12 +8,18 @@
     {
       "name": "Evgeniy Davydov",
       "email": "davydov.evgeniy.ite@gmail.com"
+    },
+    {
+      "name": "sam0delkin",
+      "email": "t.samodelkin@gmail.com"
     }
   ],
   "minimum-stability": "dev",
   "require": {
     "php": ">=5.4",
-    "symfony/symfony": "~2.3-dev"
+    "symfony/symfony": "~2.3-dev",
+    "tijsverkoyen/css-to-inline-styles": "~1.5",
+    "html2text/html2text": "~2.0"
   },
   "autoload": {
     "psr-0": {
