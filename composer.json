@@ -1,0 +1,24 @@
+{
+  "name": "ite/mail-bundle",
+  "type": "symfony-bundle",
+  "description": "Provides functional for send emails using email templates and less generating functionality for end emails",
+  "keywords": ["mail", "swiftmailer", "less", "templates"],
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Evgeniy Davydov",
+      "email": "davydov.evgeniy.ite@gmail.com"
+    }
+  ],
+  "minimum-stability": "dev",
+  "require": {
+    "php": ">=5.4",
+    "symfony/symfony": "~2.3-dev"
+  },
+  "autoload": {
+    "psr-0": {
+      "ITE\\MailBundle": ""
+    }
+  },
+  "target-dir": "ITE/MailBundle"
+}
