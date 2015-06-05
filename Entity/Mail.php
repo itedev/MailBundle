@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="mail_log")
  * @ORM\Entity
  */
-class MailLog
+class Mail
 {
     /**
      * @var integer

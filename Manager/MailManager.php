@@ -3,7 +3,7 @@
 namespace ITE\MailBundle\Manager;
 
 use Doctrine\ORM\EntityManager;
-use Jroc\CoreBundle\Entity\Mail;
+use ITE\MailBundle\Entity\Mail;
 use ITE\MailBundle\Data\MailEvent;
 use ITE\MailBundle\Token\Context;
 use ITE\MailBundle\Token\Token;
@@ -95,16 +95,6 @@ class MailManager
         }
         $mail->setFromEmail($from);
 
-        // this is guest email - add guest context for it
-//        if ($user && EmailTemplate::USER_TYPE_GUEST === $userType) {
-//            if (!isset($parameters['token_context'])) {
-//                $parameters['token_context'] = [];
-//            } elseif (!is_array($parameters['token_context'])) {
-//                $parameters['token_context'] = [$parameters['token_context']];
-//            }
-//
-//            array_push($parameters['token_context'], new Context(['user' => $user], 'guest_email'));
-//        }
         $mail->setParams($parameters);
         $mail->setSubject($subject);
         $this->buildMail($mail, $emailTemplate, $layout);
