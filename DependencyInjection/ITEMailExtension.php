@@ -12,7 +12,7 @@ use Symfony\Component\DependencyInjection\Loader;
  *
  * To learn more see {@link http://symfony.com/doc/current/cookbook/bundles/extension.html}
  */
-class MailExtension extends Extension
+class ITEMailExtension extends Extension
 {
     /**
      * {@inheritdoc}
@@ -21,6 +21,10 @@ class MailExtension extends Extension
     {
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
+
+        foreach($config as $cKey => $cVal) {
+            $container->setParameter('ite_mail.'.$cKey, $cVal);
+        }
 
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');

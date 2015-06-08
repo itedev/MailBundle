@@ -4,7 +4,7 @@ namespace ITE\MailBundle\Manager;
 
 use Doctrine\ORM\EntityManager;
 use ITE\MailBundle\Entity\Mail;
-use ITE\MailBundle\Data\MailEvent;
+use ITE\MailBundle\Event\MailEvent;
 use ITE\MailBundle\Token\Context;
 use ITE\MailBundle\Token\Token;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -122,10 +122,10 @@ class MailManager
     public function mail($type, $to = null, $subject = null, $parameters = array(), $from = null, $emailTemplate = null, $bcc = null, $layout = '')
     {
         if (!$from) {
-            $from = $this->container->getParameter('mail_from');
+            $from = $this->container->getParameter('ite_mail.from_email');
         }
         if (!$bcc) {
-            $bcc = $this->container->getParameter('transactional_emails_bcc');
+            $bcc = $this->container->getParameter('ite_mail.bcc_email');
         }
 
         $mail = $this->getMail($type, $to, $subject, $parameters, $from, $emailTemplate, $bcc, $layout);
@@ -169,7 +169,7 @@ class MailManager
     {
         $type = $mail->getType();
         if (!$layout) {
-            $layout = "JrocCoreBundle:Email/Template:{$type}.html.twig";
+            $layout = $this->container->getParameter('ite_mail.template_folder') . ":{$type}.html.twig";
         }
         if ($type && $layout) {
             $template = $this->twig->resolveTemplate($layout);
@@ -180,7 +180,7 @@ class MailManager
                 $mail->setBody($content);
                 $mail->setContentType('text/html; charset=UTF-8');
                 if (!$mail->getSubject()) {
-                    $mail->setSubject('Jordan Rudess Online Conservatory Message');
+                    $mail->setSubject('Hello');
                 }
             } else {
                 throw new \InvalidArgumentException('Template "' . $type . '" cannot be found.');
@@ -200,12 +200,7 @@ class MailManager
         /** @var \Swift_Message $swift */
         $swift = $this->mailer->createMessage();
         $swift->setTo($mail->getToEmail());
-        if (is_array($mail->getFromEmail())) {
-            $swift->setFrom($mail->getFromEmail());
-        }
-        else {
-            $swift->setFrom([$mail->getFromEmail() => 'Jordan Rudess Online Conservatory']);
-        }
+        $swift->setFrom($mail->getFromEmail());
         $swift->setSubject($mail->getSubject());
         $swift->setBody($mail->getBody());
         $swift->setContentType($mail->getContentType());
@@ -233,7 +228,7 @@ class MailManager
 
         $this->mailer->send($swift);
 
-        if(is_array($mail->getFromEmail())) {
+        if (is_array($mail->getFromEmail())) {
             $mail->setFromEmail(array_keys($mail->getFromEmail())[0]);
         }
 

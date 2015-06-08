@@ -5,13 +5,13 @@ services:
 
     ite.mail.token_manager:
         class: ITE\MailBundle\Manager\TokenManager
-        arguments: [@assetic.asset_factory]
+        arguments: [@service_container]
         tags:
             - {name: kernel.event_listener, event: ite.mail, method: onMail}
 
 #Example add extension
 #    jroc.mail.token.main_extension:
-#        class: Jroc\CoreBundle\Manager\Mail\MainExtension
+#        class: EXP\AdminBundle\Extension\Mail\MainExtension
 #        arguments: [@service_container]
 #        tags:
-#            - {name: jroc.mail.token_extension}
+#            - {name: ite.mail.extension}

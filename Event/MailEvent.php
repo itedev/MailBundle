@@ -1,6 +1,6 @@
 <?php
 
-namespace ITE\MailBundle\Data;
+namespace ITE\MailBundle\Event;
 
 
 use ITE\MailBundle\Entity\Mail;
@@ -8,7 +8,7 @@ use Symfony\Component\EventDispatcher\Event;
 
 /**
  * Class MailEvent
- * @package ITE\MailBundle\Data
+ * @package ITE\MailBundle\Event
  */
 class MailEvent extends Event {
 

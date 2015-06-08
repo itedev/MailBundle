@@ -2,11 +2,12 @@
 
 namespace ITE\MailBundle\Manager;
 
-use ITE\MailBundle\Data\MailEvent;
+use ITE\MailBundle\Event\MailEvent;
 use ITE\MailBundle\Extension\TokenExtensionInterface;
 use ITE\MailBundle\Token\Context;
 use ITE\MailBundle\Token\Token;
 use Symfony\Bundle\AsseticBundle\Factory\AssetFactory;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 use TijsVerkoyen\CssToInlineStyles\CssToInlineStyles;
 
 /**
@@ -31,9 +32,18 @@ class TokenManager
      */
     private $af;
 
-    public function __construct(AssetFactory $af)
+    /**
+     * @var ContainerInterface
+     */
+    private $container;
+
+    /**
+     * @param ContainerInterface $container
+     */
+    public function __construct(ContainerInterface $container)
     {
-        $this->af = $af;
+        $this->container = $container;
+        $this->af = $container->get('assetic.asset_factory');
     }
 
 
@@ -82,14 +92,14 @@ class TokenManager
         }
         $tokens = $this->globals;
         foreach ($this->extensions as $extension) {
-            if($context->isTest()){
+            if ($context->isTest()) {
                 $extension->setContext($context);
             }
             $tokens = array_merge($tokens, $extension->getTokens($context));
         }
 
         $result = [];
-        foreach($tokens as $token) {
+        foreach ($tokens as $token) {
             $result[$token->getToken()] = $token;
         }
 
@@ -116,7 +126,7 @@ class TokenManager
         foreach ($contexts as $context) {
             $body = $this->tokenize($body, $context);
         }
-        $css = $this->af->createAsset(['@JrocCoreBundle/Resources/public/less/email/style.less'])->dump();
+        $css = $this->af->createAsset($this->container->getParameter('ite_mail.styles'))->dump();
         $processor = new CssToInlineStyles($body, $css);
         // process & restore encoded variables in href's
         $message = preg_replace('/%5B(.*)%5D/', '[$1]', $processor->convert());
