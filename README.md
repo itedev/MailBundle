@@ -137,7 +137,7 @@ Hi User,
 
 ### Controller
 
-You can send email using template:
+You can send email using template test_template.html.twig:
 
 ```php
 // Acme\MainBundle\Controller\ArticleController.php
@@ -145,7 +145,7 @@ You can send email using template:
 public function sendAction()
     {
         $data = ['someData' => 123];
-        $this->get('ite.mail.manager')->mail('test_template', 'davydov.evgeniy.ite@gmail.com', 'Upgrade Complete', ['token_context' => new Context($data, 'test_context_name')]);
+        $this->get('ite.mail.manager')->mail('test_template', 'some_email@mail.com', 'Some subject', ['token_context' => new Context($data, 'test_context_name')]);
 
         return [];
     }
