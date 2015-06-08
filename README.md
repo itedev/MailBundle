@@ -142,7 +142,7 @@ You can send email using template test_template.html.twig:
 ```php
 // Acme\MainBundle\Controller\ArticleController.php
 
-public function sendAction()
+    public function sendAction()
     {
         $data = ['someData' => 123];
         $this
