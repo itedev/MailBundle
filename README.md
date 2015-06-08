@@ -120,7 +120,7 @@ Add mail extension to services.yml
 ```yaml
 services:
     admin.mail.token.main_extension:
-        class: EXP\AdminBundle\Extension\Mail\MainExtension
+        class: Acme\CoreBundle\Extension\Mail\MainExtension
         arguments: [@service_container]
         tags:
             - {name: ite.mail.extension}
