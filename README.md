@@ -147,7 +147,9 @@ public function sendAction()
         $data = ['someData' => 123];
         $this
             ->get('ite.mail.manager')
-            ->mail('test_template', 'some_email@mail.com', 'Some subject', ['token_context' => new Context($data, 'test_context_name')]);
+            ->mail('test_template', 'some_email@mail.com', 'Some subject', [
+                'token_context' => new Context($data, 'test_context_name')
+            ]);
 
         return [];
     }
