@@ -13,7 +13,7 @@ composer require ite/mail-bundle
 
 ### Configuration example
 
-You can configure default query parameter names and templates
+You can configure default parameters for email senders and using styles for email templates
 
 ```yaml
 ite_mail:
