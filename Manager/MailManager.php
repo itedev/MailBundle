@@ -124,8 +124,13 @@ class MailManager
         if (!$from) {
             $from = $this->container->getParameter('ite_mail.from_email');
         }
+
         if (!$bcc) {
             $bcc = $this->container->getParameter('ite_mail.bcc_email');
+        }
+
+        if($translationDomain = $this->container->getParameter('ite_mail.translation_domain')) {
+            $subject = $this->container->get('translator')->trans($subject, [], $translationDomain);
         }
 
         $mail = $this->getMail($type, $to, $subject, $parameters, $from, $emailTemplate, $bcc, $layout);

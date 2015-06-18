@@ -17,11 +17,13 @@ You can configure default parameters for email senders and using styles for emai
 
 ```yaml
 ite_mail:
+    bcc_email: %bcc_email%
     from_email: %support_email%
     support_email: %support_email%
     noreply_email: %noreply_email%
     template_folder: AcmeCoreBundle:Email/Template #folder with all email templates
-    styles: ['@AcmeCoreBundle/Resources/public/less/email/style.less', '@AcmeCoreBundle/Resources/public/less/email/style2.less'] #additional styles for email templates will be generated to inline styles in end email 
+    styles: ['@AcmeCoreBundle/Resources/public/less/email/style.less', '@AcmeCoreBundle/Resources/public/less/email/style2.less'] #additional styles for email templates will be generated to inline styles in end email
+    translation_domain: email_subjects #provide translations for end email subjects
 ```
 
 ### Add ITEMailBundle to your application kernel

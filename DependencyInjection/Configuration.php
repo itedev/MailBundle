@@ -26,6 +26,7 @@ class Configuration implements ConfigurationInterface
                 ->scalarNode('support_email')->isRequired()->cannotBeEmpty()->end()
                 ->scalarNode('noreply_email')->isRequired()->cannotBeEmpty()->end()
                 ->scalarNode('bcc_email')->defaultNull()->end()
+                ->scalarNode('translation_domain')->defaultNull()->end()
                 ->arrayNode('styles')
                     ->addDefaultsIfNotSet()
                     ->children()
